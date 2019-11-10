@@ -6,7 +6,8 @@ WORKDIR /go/src/twitter-bot
 RUN go get github.com/ChimeraCoder/anaconda && \
     go get github.com/joho/godotenv && \
     go get github.com/mmcdole/gofeed && \
-    go get github.com/jasonlvhit/gocron
+    go get github.com/jasonlvhit/gocron && \
+    yum update && yum install ca-certificates && rm -rf /var/cache/yum/*
 
 # Build modules
 COPY main.go .
