@@ -26,8 +26,9 @@ func main() {
 	for _, item := range feed.Items {
 		if !tweeted(item.Title, api) {
 			// tweet, _ := api.PostTweet(item.Title+"\n"+item.Link, nil)
+			api.PostTweet(item.Title+"\n"+item.Link, nil)
 			// fmt.Println(tweet)
-			fmt.Println(item.Title)
+			fmt.Println(item.Title + "\n" + item.Link)
 			return
 		}
 	}
