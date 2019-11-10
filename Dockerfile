@@ -15,9 +15,17 @@ RUN GOOS=linux CGO_ENABLED=0 go build main.go
 
 #--
 
+FROM alpine as certs
+RUN apk update && apk add ca-certificates
+
+#--
+
 # Production image
 FROM busybox
 WORKDIR /opt/twitter-bot/bin
+
+# certificates
+COPY --from=certs /etc/ssl/certs /etc/ssl/certs
 
 # Deploy modules
 COPY --from=builder /go/src/twitter-bot .
@@ -25,5 +33,4 @@ ENV TZ=Asia/Tokyo
 COPY crontab /var/spool/cron/crontabs/root
 # ENTRYPOINT ["/opt/twitter-bot/bin/main"]
 # CMD ["crond" "-f", "-d", "8"]
-RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 CMD crond -f -d 8
