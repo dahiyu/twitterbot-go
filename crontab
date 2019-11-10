@@ -1,1 +1,1 @@
-*/1 * * * * /opt/twitter-bot/bin/main
+* * * * * /opt/twitter-bot/bin/main
