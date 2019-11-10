@@ -6,8 +6,7 @@ WORKDIR /go/src/twitter-bot
 RUN go get github.com/ChimeraCoder/anaconda && \
     go get github.com/joho/godotenv && \
     go get github.com/mmcdole/gofeed && \
-    go get github.com/jasonlvhit/gocron && \
-    yum update && yum install ca-certificates && rm -rf /var/cache/yum/*
+    go get github.com/jasonlvhit/gocron
 
 # Build modules
 COPY main.go .
@@ -26,4 +25,5 @@ ENV TZ=Asia/Tokyo
 COPY crontab /var/spool/cron/crontabs/root
 # ENTRYPOINT ["/opt/twitter-bot/bin/main"]
 # CMD ["crond" "-f", "-d", "8"]
+RUN apk update && apk add ca-certificates && rm -rf /var/cache/apk/*
 CMD crond -f -d 8
