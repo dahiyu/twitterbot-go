@@ -30,7 +30,7 @@ func getTwitterApi() *anaconda.TwitterApi {
 func existsTweet(title string, api *anaconda.TwitterApi) bool {
 	v := url.Values{}
 	v.Set("user_id", "1093431019930247168")
-	v.Set("count", "10")
+	v.Set("count", "100")
 	tweets, _ := api.GetUserTimeline(v)
 	for _, tweet := range tweets {
 		if strings.Contains(tweet.FullText, title) {
